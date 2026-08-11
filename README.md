@@ -107,9 +107,7 @@ A URL-shortening project with separate frontend and backend components.
 
 Stack: Backend + Frontend
 
-<a href="https://github.com/Rudranilkesh/URL_SHORTNER">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Rudranilkesh&repo=URL_SHORTNER&theme=tokyonight&hide_border=true" alt="URL_SHORTNER"/>
-</a>
+<a href="https://github.com/Rudranilkesh/URL_SHORTNER"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
 </td>
 <td width="50%">
@@ -120,9 +118,7 @@ A personal portfolio project focused on presenting Rudranil Kesh and frontend wo
 
 Stack: HTML
 
-<a href="https://github.com/Rudranilkesh/html-portfolio">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Rudranilkesh&repo=html-portfolio&theme=tokyonight&hide_border=true" alt="html-portfolio"/>
-</a>
+<a href="https://github.com/Rudranilkesh/html-portfolio"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
 </td>
 </tr>
@@ -136,9 +132,7 @@ A simple web-based resume project built with HTML.
 
 Stack: HTML
 
-<a href="https://github.com/Rudranilkesh/html-resume">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Rudranilkesh&repo=html-resume&theme=tokyonight&hide_border=true" alt="html-resume"/>
-</a>
+<a href="https://github.com/Rudranilkesh/html-resume"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
 </td>
 <td width="50%">
@@ -157,23 +151,45 @@ I keep experimenting with frontend development, programming, databases and full-
 
 📊 GitHub Analytics
 
+These cards are generated inside this repository with GitHub Actions.That means the profile does not depend on the public github-readme-stats,streak, or activity-graph web endpoints that can go down or hit rate limits.
+
 <div align="center">
 
 <a href="https://github.com/Rudranilkesh">
-  <img height="180" src="https://github-readme-stats.vercel.app/api?username=Rudranilkesh&show_icons=true&include_all_commits=true&rank_icon=github&theme=tokyonight&hide_border=true&custom_title=Rudranilkesh%27s%20GitHub%20Stats" alt="GitHub Stats"/>
+  <img width="49%" src="./profile/profile.svg" alt="GitHub Analytics"/>
 </a>
 <a href="https://github.com/Rudranilkesh">
-  <img height="180" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Rudranilkesh&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&custom_title=Most%20Used%20Languages" alt="Top Languages"/>
+  <img width="49%" src="./profile/top-langs.svg" alt="Top Languages by Repository Code"/>
 </a>
 
 </div>
+
+🧠 Top Languages — Repository vs Commit Activity
+
+<div align="center">
+
+<a href="https://github.com/Rudranilkesh">
+  <img width="49%" src="./profile/top-langs.svg" alt="Top Languages by Repository Code"/>
+</a>
+<a href="https://github.com/Rudranilkesh">
+  <img width="49%" src="./profile/language.svg" alt="Top Languages by Commit Changes"/>
+</a>
+
+</div>
+
+<p align="center">
+  <sub>
+    Left: languages detected across your public repositories.
+    Right: languages inferred from additions + deletions in sampled commits.
+  </sub>
+</p>
 
 🔥 Contribution Streak
 
 <div align="center">
 
 <a href="https://github.com/Rudranilkesh">
-  <img src="https://streak-stats.demolab.com/?user=Rudranilkesh&theme=tokyonight" alt="GitHub Contribution Streak"/>
+  <img src="./profile/streak.svg" alt="GitHub Contribution Streak"/>
 </a>
 
 </div>
@@ -182,8 +198,8 @@ I keep experimenting with frontend development, programming, databases and full-
 
 <div align="center">
 
-<a href="https://github.com/ryo-ma/github-profile-trophy">
-  <img src="https://github-profile-trophy.vercel.app/?username=Rudranilkesh&theme=tokyonight&no-frame=true&no-bg=true&margin-w=8&row=1" alt="GitHub Trophies"/>
+<a href="https://github.com/Rudranilkesh">
+  <img src="./profile/trophy.svg" alt="GitHub Trophies"/>
 </a>
 
 </div>
@@ -192,19 +208,16 @@ I keep experimenting with frontend development, programming, databases and full-
 
 <div align="center">
 
-<a href="https://github.com/ashutosh00710/github-readme-activity-graph">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Rudranilkesh&theme=tokyo-night&hide_border=true&area=true&custom_title=Rudranilkesh%27s%20Contribution%20Activity" alt="GitHub Contribution Activity Graph"/>
+<a href="https://github.com/Rudranilkesh">
+  <img width="49%" src="./profile/heatmap.svg" alt="GitHub Contribution Heatmap"/>
+</a>
+<a href="https://github.com/Rudranilkesh">
+  <img width="49%" src="./profile/timedist.svg" alt="GitHub Commit Time Distribution"/>
 </a>
 
 </div>
 
-📅 Contribution Overview
-
-<div align="center">
-
-<img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Rudranilkesh&theme=tokyonight" alt="GitHub Profile Summary"/>
-
-</div>
+Automatic updates: the workflow in .github/workflows/update-profile-stats.ymlrefreshes these SVGs daily and can also be started manually from the Actions tab.
 
 💡 What I'm Focused On
 
