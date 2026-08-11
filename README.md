@@ -1,8 +1,8 @@
 <div align="center">
 
-👋 Hey, I'm RudraniL Kesh
+# 👋 Hey, I'm RudraniL Kesh
 
-Full-Stack Developer • BCA Student • Backend Enthusiast • Guitarist 🎸
+### Full-Stack Developer • BCA Student • Backend Enthusiast • Guitarist 🎸
 
 <p>
   <a href="https://github.com/Rudranilkesh">
@@ -19,25 +19,24 @@ Full-Stack Developer • BCA Student • Backend Enthusiast • Guitarist 🎸
 
 </div>
 
-🧑‍💻 About Me
+---
 
-I'm RudraniL Kesh, a BCA student and developer from India who enjoys turning ideas into working software.
+## 🧑‍💻 About Me
 
-🔭 Currently building URL_SHORTNER
+I'm **RudraniL Kesh**, a BCA student and developer from India who enjoys turning ideas into working software.
 
-🌱 Currently learning Data Science & AI/ML
+- 🔭 Currently building **[URL_SHORTNER](https://github.com/Rudranilkesh/URL_SHORTNER)**
+- 🌱 Currently learning **Data Science & AI/ML**
+- 💻 Interested in **Full-Stack Development, Backend Engineering & APIs**
+- 🧠 Practising **DSA, databases, system thinking and software development**
+- 🎸 Outside code, I'm a **guitarist**
+- 📫 Reach me at **[rudranilkesh6@gmail.com](mailto:rudranilkesh6@gmail.com)**
 
-💻 Interested in Full-Stack Development, Backend Engineering & APIs
+> **Code is the craft. Curiosity is the engine. Consistency is the multiplier.**
 
-🧠 Practising DSA, databases, system thinking and software development
+---
 
-🎸 Outside code, I'm a guitarist
-
-📫 Reach me at rudranilkesh6@gmail.com
-
-Code is the craft. Curiosity is the engine. Consistency is the multiplier.
-
-🌐 Connect With Me
+## 🌐 Connect With Me
 
 <p align="left">
   <a href="https://www.linkedin.com/in/rudranilkesh6">
@@ -60,33 +59,35 @@ Code is the craft. Curiosity is the engine. Consistency is the multiplier.
   </a>
 </p>
 
-🛠️ Tech Stack
+---
 
-Languages
+## 🛠️ Tech Stack
+
+### Languages
 
 <p>
   <img src="https://skillicons.dev/icons?i=c,cpp,python,java,javascript,typescript" alt="Languages"/>
 </p>
 
-Frontend
+### Frontend
 
 <p>
   <img src="https://skillicons.dev/icons?i=html,css,react,redux,tailwind,vue,figma" alt="Frontend"/>
 </p>
 
-Backend & Databases
+### Backend & Databases
 
 <p>
   <img src="https://skillicons.dev/icons?i=nodejs,express,mongodb,mysql,postgresql,redis,firebase" alt="Backend and Databases"/>
 </p>
 
-Tools & Platforms
+### Tools & Platforms
 
 <p>
   <img src="https://skillicons.dev/icons?i=git,github,docker,postman,aws" alt="Tools and Platforms"/>
 </p>
 
-Data & Creative Tools
+### Data & Creative Tools
 
 <p>
   <img src="https://skillicons.dev/icons?i=pandas" alt="Pandas"/>
@@ -95,28 +96,30 @@ Data & Creative Tools
   <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" width="48" height="48" alt="Blender"/>
 </p>
 
-🚀 Featured Projects
+---
+
+## 🚀 Featured Projects
 
 <table>
 <tr>
 <td width="50%">
 
-🔗 URL_SHORTNER
+### 🔗 URL_SHORTNER
 
 A URL-shortening project with separate frontend and backend components.
 
-Stack: Backend + Frontend
+**Stack:** Backend + Frontend
 
 <a href="https://github.com/Rudranilkesh/URL_SHORTNER"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
 </td>
 <td width="50%">
 
-🌐 HTML Portfolio
+### 🌐 HTML Portfolio
 
 A personal portfolio project focused on presenting Rudranil Kesh and frontend work.
 
-Stack: HTML
+**Stack:** HTML
 
 <a href="https://github.com/Rudranilkesh/html-portfolio"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
@@ -126,18 +129,18 @@ Stack: HTML
 <tr>
 <td width="50%">
 
-📄 HTML Resume
+### 📄 HTML Resume
 
 A simple web-based resume project built with HTML.
 
-Stack: HTML
+**Stack:** HTML
 
 <a href="https://github.com/Rudranilkesh/html-resume"><img src="https://img.shields.io/badge/View%20Repository-181717?style=for-the-badge&logo=github" alt="View repository"/></a>
 
 </td>
 <td width="50%">
 
-🧪 More Experiments
+### 🧪 More Experiments
 
 I keep experimenting with frontend development, programming, databases and full-stack concepts.
 
@@ -149,86 +152,74 @@ I keep experimenting with frontend development, programming, databases and full-
 </tr>
 </table>
 
-📊 GitHub Analytics
+---
 
-These cards are generated inside this repository with GitHub Actions.That means the profile does not depend on the public github-readme-stats,streak, or activity-graph web endpoints that can go down or hit rate limits.
+# 📊 GitHub Analytics
 
 <div align="center">
 
+### 📈 GitHub Stats
+
 <a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/profile.svg" alt="GitHub Analytics"/>
+  <img width="48%" src="./profile/profile.svg" alt="GitHub Analytics" />
 </a>
 <a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/top-langs.svg" alt="Top Languages by Repository Code"/>
+  <img width="48%" src="./profile/top-langs.svg" alt="Top Languages by Repository" />
+</a>
+
+### 🧠 Top Languages — Repository vs Commit Changes
+
+<a href="https://github.com/Rudranilkesh">
+  <img width="48%" src="./profile/top-langs.svg" alt="Top Languages by Repository" />
+</a>
+<a href="https://github.com/Rudranilkesh">
+  <img width="48%" src="./profile/language.svg" alt="Top Languages by Commit Changes" />
+</a>
+
+<sub>Left: repository code distribution · Right: language usage inferred from commit additions and deletions.</sub>
+
+### 🔥 Contribution Streak
+
+<a href="https://github.com/Rudranilkesh">
+  <img src="./profile/streak.svg" alt="GitHub Contribution Streak" />
+</a>
+
+### 🏆 GitHub Trophies
+
+<a href="https://github.com/Rudranilkesh">
+  <img src="./profile/trophy.svg" alt="GitHub Trophies" />
+</a>
+
+### 🟩 Contribution Heatmap & Commit Activity
+
+<a href="https://github.com/Rudranilkesh">
+  <img width="48%" src="./profile/heatmap.svg" alt="GitHub Contribution Heatmap" />
+</a>
+<a href="https://github.com/Rudranilkesh">
+  <img width="48%" src="./profile/timedist.svg" alt="GitHub Commit Time Distribution" />
 </a>
 
 </div>
 
-🧠 Top Languages — Repository vs Commit Activity
+> **Automatic updates:** GitHub Actions regenerates these SVG cards daily. You can also run the workflow manually from the **Actions** tab.
 
-<div align="center">
+---
 
-<a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/top-langs.svg" alt="Top Languages by Repository Code"/>
-</a>
-<a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/language.svg" alt="Top Languages by Commit Changes"/>
-</a>
+## 💡 What I'm Focused On
 
-</div>
-
-<p align="center">
-  <sub>
-    Left: languages detected across your public repositories.
-    Right: languages inferred from additions + deletions in sampled commits.
-  </sub>
-</p>
-
-🔥 Contribution Streak
-
-<div align="center">
-
-<a href="https://github.com/Rudranilkesh">
-  <img src="./profile/streak.svg" alt="GitHub Contribution Streak"/>
-</a>
-
-</div>
-
-🏆 GitHub Trophies
-
-<div align="center">
-
-<a href="https://github.com/Rudranilkesh">
-  <img src="./profile/trophy.svg" alt="GitHub Trophies"/>
-</a>
-
-</div>
-
-📈 Contribution & Commit Activity
-
-<div align="center">
-
-<a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/heatmap.svg" alt="GitHub Contribution Heatmap"/>
-</a>
-<a href="https://github.com/Rudranilkesh">
-  <img width="49%" src="./profile/timedist.svg" alt="GitHub Commit Time Distribution"/>
-</a>
-
-</div>
-
-Automatic updates: the workflow in .github/workflows/update-profile-stats.ymlrefreshes these SVGs daily and can also be started manually from the Actions tab.
-
-💡 What I'm Focused On
-
+```text
 Backend Engineering    ███████████████████░░   APIs • Node.js • Express • Databases
 Frontend Development   ██████████████████░░░   React • JavaScript • TypeScript
 Problem Solving       ████████████████░░░░░   DSA • Algorithms • Programming
 Data & AI              █████████████░░░░░░░   Python • Data Science • AI/ML
 Developer Tools        ███████████████░░░░░░   Git • GitHub • Docker • Postman
+```
 
-🎯 Current Learning Path
+---
 
+## 🎯 Current Learning Path
+
+```text
         ┌──────────────────────┐
         │   Core Programming   │
         └──────────┬───────────┘
@@ -249,12 +240,15 @@ Developer Tools        ███████████████░░░░
         ┌──────────────────────┐
         │     AI / Data        │
         └──────────────────────┘
+```
 
-⚡ GitHub Mindset
+---
+
+## ⚡ GitHub Mindset
 
 <div align="center">
 
-Learn → Build → Break → Debug → Improve → Repeat
+**Learn → Build → Break → Debug → Improve → Repeat**
 
 <br/>
 
@@ -268,9 +262,11 @@ Learn → Build → Break → Debug → Improve → Repeat
 
 </div>
 
+---
+
 <div align="center">
 
-⭐ If you find something useful, consider giving it a star!
+### ⭐ If you find something useful, consider giving it a star!
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f172a,100:2563eb&height=100&section=footer" alt="Footer"/>
 
