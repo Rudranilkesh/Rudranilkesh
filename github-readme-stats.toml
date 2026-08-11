@@ -1,7 +1,0 @@
-[time]
-timezone = "Asia/Kolkata"
-
-[language]
-commits_limit = 1000
-top_n = 8
-exclude = ["HTML", "CSS"]
