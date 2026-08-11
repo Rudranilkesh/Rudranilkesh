@@ -1,0 +1,75 @@
+name: Update GitHub Profile Stats
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout profile repository
+        uses: actions/checkout@v6
+
+      - name: Create profile directory
+        run: mkdir -p profile
+
+      - name: Generate GitHub analytics
+        uses: lucifer1004/github-stats-typst@v1
+        with:
+          username: ${{ github.repository_owner }}
+          token: ${{ secrets.GHT }}
+          theme: tokyo-night
+          cards: profile,timedist,heatmap,language
+          output-dir: profile
+
+      - name: Generate top languages by repository code
+        uses: stats-organization/github-readme-stats-action@v2
+        with:
+          card: top-langs
+          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&size_weight=1&count_weight=0
+          path: profile/top-langs.svg
+          token: ${{ secrets.GHT }}
+          fail_on_error: true
+
+      - name: Generate contribution streak
+        uses: DenverCoder1/github-readme-streak-stats@main
+        with:
+          options: user=${{ github.repository_owner }}&theme=tokyonight&hide_border=true&disable_animations=true&timezone=Asia%2FKolkata
+          path: profile/streak.svg
+          token: ${{ secrets.GHT }}
+
+      - name: Generate GitHub trophies
+        uses: Erik-Donath/github-profile-trophy@feature/generate-svg
+        with:
+          username: ${{ github.repository_owner }}
+          output_path: profile/trophy.svg
+          token: ${{ secrets.GHT }}
+
+      - name: Verify generated cards
+        run: |
+          set -e
+          for file in profile/profile.svg profile/top-langs.svg profile/language.svg profile/streak.svg profile/trophy.svg profile/heatmap.svg profile/timedist.svg; do
+            if [ ! -s "$file" ]; then
+              echo "Missing or empty generated file: $file"
+              exit 1
+            fi
+            echo "OK: $file ($(wc -c < "$file") bytes)"
+          done
+
+      - name: Commit generated cards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/*.svg
+          if git diff --staged --quiet; then
+            echo "No stats changes to commit."
+          else
+            git commit -m "chore: update GitHub profile stats"
+            git push
+          fi
