@@ -201,8 +201,6 @@ I keep experimenting with frontend development, programming, databases and full-
 
 </div>
 
-> **Automatic updates:** GitHub Actions regenerates these SVG cards daily. You can also run the workflow manually from the **Actions** tab.
-
 ---
 
 ## 💡 What I'm Focused On
