@@ -130,7 +130,7 @@
           data-testid="lang-progress"
           x="0"
           y="0"
-          width="222"
+          width="221.99"
           height="8"
           fill="#DA5B0B"
         />
@@ -138,7 +138,7 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="222"
+          x="221.99"
           y="0"
           width="11.9"
           height="8"
@@ -148,7 +148,7 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="233.9"
+          x="233.89000000000001"
           y="0"
           width="15.86"
           height="8"
@@ -158,9 +158,9 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="239.76000000000002"
+          x="239.75000000000003"
           y="0"
-          width="14.17"
+          width="14.190000000000001"
           height="8"
           fill="#f1e05a"
         />
@@ -168,7 +168,7 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="243.93"
+          x="243.94000000000003"
           y="0"
           width="14.14"
           height="8"
@@ -178,7 +178,7 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="248.07"
+          x="248.08"
           y="0"
           width="11.370000000000001"
           height="8"
@@ -188,7 +188,7 @@
         <rect
           mask="url(#rect-mask)"
           data-testid="lang-progress"
-          x="249.44"
+          x="249.45000000000002"
           y="0"
           width="10.54"
           height="8"
@@ -201,7 +201,7 @@
     <g class="stagger" style="animation-delay: 450ms">
       <circle cx="5" cy="6" r="5" fill="#DA5B0B" />
       <text data-testid="lang-name" x="15" y="10" class='lang-name'>
-        Jupyter Notebook 88.80%
+        Jupyter Notebook 88.79%
       </text>
     </g>
   </g><g transform="translate(0, 25)">
@@ -222,7 +222,7 @@
     <g class="stagger" style="animation-delay: 900ms">
       <circle cx="5" cy="6" r="5" fill="#f1e05a" />
       <text data-testid="lang-name" x="15" y="10" class='lang-name'>
-        JavaScript 1.67%
+        JavaScript 1.68%
       </text>
     </g>
   </g></g><g transform="translate(150, 0)"><g transform="translate(0, 0)">
