@@ -17,6 +17,8 @@ Remove-Item Env:STATIC
 
 On macOS or Linux, run `STATIC=1 python render_cards.py --output preview/cards`.
 
-The **Update Profile Stats** action runs daily at 03:17 UTC and can also be run manually. It fetches the public GitHub contribution calendar, saves the latest 365 days to `data/contributions.json`, regenerates `cards/`, and commits changes using GitHub's built-in workflow token. If GitHub's public calendar markup changes, the refresh fails before publishing and the previous cards stay on the profile.
+The **Update Profile Stats** action runs daily at 03:17 UTC and can also be run manually. It saves the latest 365 calendar days to `data/contributions.json` and the seven-day public commit count to `data/commits.json`. It regenerates `cards/` and commits changes using GitHub's built-in workflow token. If an activity source fails, the previous cards stay on the profile.
+
+Commit Sun uses [GitHub Commit Search](https://docs.github.com/en/search-github/searching-on-github/searching-commits). Its seven-day window ends on the latest date in the public contribution calendar. Search covers authored commits on public repositories' default branches. Between zero and ten commits, the sun's corona expands and brightens and its pulse speeds up. The card stays at maximum intensity above ten and continues to display the full count. Reduced motion and `STATIC=1` keep the sun still.
 
 To refresh the snapshot locally, run `python render_cards.py --refresh Rudranilkesh`. The analytics use the dates, totals, and activity levels visible on the public calendar. The chart includes partial months at the ends of the 365-day range. The portrait comes from `assets/portrait.jpg`. Pass a different JPEG with `--portrait`, or point the flag at a missing file to use initials.

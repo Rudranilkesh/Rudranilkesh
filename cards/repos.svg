@@ -11,7 +11,7 @@
           @keyframes entrance { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
           @keyframes rise { from { transform:scaleY(.03); } to { transform:scaleY(1); } }
           @media (prefers-reduced-motion: reduce) {
-            .panel-content,.bars { animation:none; }
+            .panel-content,.bars,.solar-glow,.solar-orbit,.solar-surface { animation:none; }
             .flash { display:none; }
           }
   </style>

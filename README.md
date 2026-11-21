@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./cards/hero.svg" width="100%" alt="RudraniL Kesh. BCA student building full-stack apps, APIs and backend systems.">
+  <a href="https://rudranilkesh.github.io/html-portfolio/"><img src="./cards/hero.svg" width="100%" alt="Visit RudraniL Kesh’s portfolio. BCA student building full-stack apps, APIs and backend systems."></a>
 </div>
 
 <p align="center">
@@ -9,7 +9,11 @@
 </p>
 
 <p align="center">
-  <img src="./cards/monthly.svg" width="100%" alt="Monthly contribution totals, current streak, active days and busiest day">
+  <a href="https://github.com/search?q=author%3ARudranilkesh+is%3Apublic&amp;type=commits&amp;s=author-date&amp;o=desc"><img src="./cards/commit-sun.svg" width="100%" alt="Commit Sun, an animated star powered by public commits from the last seven days. Browse RudraniL’s commits."></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Rudranilkesh#contribution-activity"><img src="./cards/monthly.svg" width="100%" alt="Monthly contribution totals, current streak, active days and busiest day"></a>
 </p>
 
 ## Featured projects

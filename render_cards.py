@@ -10,11 +10,12 @@ from html.parser import HTMLParser
 import json
 import os
 from pathlib import Path
+from random import Random
 import re
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from urllib.request import Request, urlopen
 from xml.etree import ElementTree
 
@@ -22,6 +23,7 @@ from xml.etree import ElementTree
 ROOT = Path(__file__).resolve().parent
 ASSETS = ROOT / "assets"
 DATA = ROOT / "data" / "contributions.json"
+COMMITS = ROOT / "data" / "commits.json"
 STATIC = os.environ.get("STATIC") == "1"
 DAY = timedelta(days=1)
 WIDTH = 840
@@ -85,6 +87,21 @@ def refresh_calendar(username):
         return read_calendar(response.read().decode("utf-8"))
 
 
+def refresh_commits(username, end):
+    start = end - 6 * DAY
+    query = urlencode({"q": f"author:{username} author-date:{start}..{end} is:public", "per_page": 1})
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "profile-card-renderer"}
+    token = os.environ.get("GH_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    request = Request(f"https://api.github.com/search/commits?{query}", headers=headers)
+    with urlopen(request, timeout=30) as response:
+        results = json.load(response)
+    if results["incomplete_results"]:
+        raise ValueError("GitHub returned an incomplete commit search")
+    return {"end": end.isoformat(), "count": results["total_count"]}
+
+
 def text(x, y, value, size=20, color=INK, bold=False, anchor="start"):
     weight = ' font-weight="700"' if bold else ""
     return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
@@ -125,7 +142,7 @@ def fonts(body):
     return "\n".join(css)
 
 
-def card(title, body, height, delay, width=WIDTH):
+def card(title, body, height, delay, width=WIDTH, *, dark=False, motion_css=""):
     motion = ""
     flash = ""
     if not STATIC:
@@ -134,9 +151,9 @@ def card(title, body, height, delay, width=WIDTH):
           .bars {{ transform-box:fill-box; transform-origin:center bottom;
                    animation: rise .66s ease-out {delay + .16:.2f}s both; }}
           @keyframes entrance {{ from {{ opacity:0; transform:translateY(8px); }} to {{ opacity:1; transform:translateY(0); }} }}
-          @keyframes rise {{ from {{ transform:scaleY(.03); }} to {{ transform:scaleY(1); }} }}
+          @keyframes rise {{ from {{ transform:scaleY(.03); }} to {{ transform:scaleY(1); }} }}{motion_css}
           @media (prefers-reduced-motion: reduce) {{
-            .panel-content,.bars {{ animation:none; }}
+            .panel-content,.bars,.solar-glow,.solar-orbit,.solar-surface {{ animation:none; }}
             .flash {{ display:none; }}
           }}"""
         flash = (f'<g class="flash" opacity="0"><path d="M18 10H{width - 22}" stroke="#738bff" stroke-width="3"/>'
@@ -152,7 +169,7 @@ def card(title, body, height, delay, width=WIDTH):
     <pattern id="dots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.15" fill="{BLUE}"/></pattern>
   </defs>
   {rect(5, 5, width - 7, height - 7, INK, 15)}
-  {rect(2, 2, width - 8, height - 8, PAPER, 14, f'stroke="{INK}" stroke-width="2"')}
+  {rect(2, 2, width - 8, height - 8, '#090d23' if dark else PAPER, 14, f'stroke="{INK}" stroke-width="2"')}
   <g class="panel-content">{body}</g>
   {flash}
 </svg>
@@ -185,6 +202,94 @@ def tile(title, detail, symbol, delay):
     body += text(73, 41, title, 24, INK, True) + text(73, 64, detail, 16, MUTED)
     body += arrow(224, 33)
     return card(title, body, 92, delay, 273)
+
+
+def commit_sun(snapshot):
+    count = snapshot["count"]
+    if type(count) is not int or count < 0:
+        raise ValueError("Commit count must be a non-negative integer")
+    end = date.fromisoformat(snapshot["end"])
+    start = end - 6 * DAY
+    heat = min(count / 10, 1)
+    glow = .52 + heat * .48
+    delay = .56
+    pulse = 6.8 - heat * 3.6
+    motion = f"""
+          .solar-glow {{ animation: solar-pulse {pulse:.2f}s ease-in-out {delay + .55:.2f}s infinite; }}
+          .solar-orbit {{ transform-origin:0px 0px; animation: solar-orbit {pulse * 2.5:.2f}s linear {delay + .55:.2f}s infinite; }}
+          .solar-surface {{ animation: solar-drift {pulse * 3.5:.2f}s ease-in-out {delay + .55:.2f}s infinite; }}
+          @keyframes solar-pulse {{ 50% {{ opacity:{max(.14, glow - .33):.2f}; }} }}
+          @keyframes solar-orbit {{ to {{ transform:rotate(360deg); }} }}
+          @keyframes solar-drift {{ 50% {{ transform:translate(12px,-4px); }} }}"""
+    body = f'''<defs>
+      <radialGradient id="nebula" cx="72%" cy="49%" r="62%">
+        <stop stop-color="#25245a"/><stop offset="1" stop-color="#090d23" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="corona">
+        <stop offset=".42" stop-color="#fff3bd" stop-opacity=".72"/>
+        <stop offset=".53" stop-color="#ffb342" stop-opacity=".73"/>
+        <stop offset=".73" stop-color="#fc6018" stop-opacity=".28"/>
+        <stop offset="1" stop-color="#ec481e" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="photosphere" cx="35%" cy="29%" r="76%">
+        <stop stop-color="#fff7cb"/><stop offset=".30" stop-color="#ffdb70"/>
+        <stop offset=".64" stop-color="#f9a035"/><stop offset=".86" stop-color="#c4441d"/>
+        <stop offset="1" stop-color="#631944"/>
+      </radialGradient>
+      <radialGradient id="surface-light" cx="30%" cy="25%" r="80%">
+        <stop stop-color="#fff8d0" stop-opacity=".80"/><stop offset=".75" stop-color="#ffb13d" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="orbit-line"><stop stop-color="#7d86f6" stop-opacity=".26"/>
+        <stop offset=".72" stop-color="#ffd797" stop-opacity=".66"/>
+        <stop offset="1" stop-color="#6d70e0" stop-opacity=".1"/>
+      </linearGradient>
+      <clipPath id="solar-disk"><circle cx="616" cy="151" r="85"/></clipPath>
+    </defs>
+    {rect(4, 4, 828, 294, 'url(#nebula)', 12)}'''
+
+    stars = Random(19)
+    for _ in range(85):
+        x, y = stars.randint(398, 814), stars.randint(21, 280)
+        body += (f'<circle cx="{x}" cy="{y}" r="{stars.uniform(.35, 1.25):.2f}" '
+                 f'fill="#aabaff" opacity="{stars.uniform(.18, .56):.2f}"/>')
+
+    body += f'''<circle class="solar-glow" cx="616" cy="151" r="{151 + 21 * heat:.2f}" fill="url(#corona)" opacity="{glow:.2f}"/>
+      <ellipse cx="616" cy="151" rx="163" ry="63" transform="rotate(23 616 151)"
+        fill="none" stroke="#8394ee" stroke-opacity=".21" stroke-dasharray="2 6"/>
+      <g transform="translate(616 151) rotate(-23) scale(1 .37)">
+        <circle r="151" fill="none" stroke="url(#orbit-line)" stroke-width="1.6"/>
+        <g class="solar-orbit"><g transform="translate(151 0) scale(1 2.7)">
+          <circle r="8.5" fill="#af9aff" opacity=".28"/><circle r="3.6" fill="#ece4ff"/>
+        </g></g>
+      </g>
+      <circle cx="616" cy="151" r="85" fill="url(#photosphere)"/>
+      <g clip-path="url(#solar-disk)">
+        <g class="solar-surface">'''
+    texture = Random(35)
+    for _ in range(74):
+        x, y = texture.randint(522, 697), texture.randint(62, 238)
+        w = texture.randint(5, 26)
+        tone = texture.choice(("#ffefb2", "#f06021", "#9f2e29", "#febd52"))
+        body += (f'<path d="M{x} {y}q{w / 2:.1f} {texture.randint(-7, 8)} {w} -3" fill="none" '
+                 f'stroke="{tone}" stroke-width="{texture.uniform(.5, 3.0):.2f}" '
+                 f'stroke-opacity="{texture.uniform(.20, .53):.2f}" stroke-linecap="round"/>')
+    body += '''</g><circle cx="616" cy="151" r="85" fill="url(#surface-light)"/></g>
+      <circle cx="616" cy="151" r="85" fill="none" stroke="#ffe19c" stroke-opacity=".37"/>
+      <path d="M477 183c16 26 102 16 180-18 75-33 123-76 99-97" fill="none"
+        stroke="url(#orbit-line)" stroke-width="1.3"/>
+      <path d="M744 54h18m-9-9v18" stroke="#bbc6ff" stroke-linecap="round" opacity=".66"/>'''
+
+    date_range = f"{start:%b} {start.day} – {end:%b} {end.day}, {end.year}"
+    body += text(33, 45, "GITHUB ACTIVITY", 15, "#b9c4ff", True)
+    body += text(29, 97, "Commit Sun", 53, PAPER, True)
+    body += text(33, 127, "More commits, brighter glow, faster pulse.", 19, "#c7d0fa")
+    body += '<path d="M34 148h332" stroke="#485382" stroke-opacity=".72"/>'
+    body += text(33, 199, f"{count:,}", 45, "#ffdb83", True)
+    body += text(34, 223, "Public commits in 7 days", 18, PAPER, True)
+    body += text(34, 248, date_range, 16, "#b9c4ff")
+    body += text(34, 278, "Browse commits", 17, "#ffdb83", True) + arrow(169, 263, "#ffdb83")
+    return card(f"Commit Sun. {count:,} public commits from {date_range}.", body, 306, delay,
+                dark=True, motion_css=motion)
 
 
 def repo(title, description, tools, delay):
@@ -230,7 +335,7 @@ def monthly(days):
         labels += text(x, baseline - h - 7, count, 15, INK, True, "middle")
         labels += text(x, 285, calendar.month_abbr[month], 14, MUTED, False, "middle")
     return card("Monthly GitHub contributions, streak, active days and busiest day",
-                body + f'<g class="bars">{bars}</g>' + labels, 308, .62)
+                body + f'<g class="bars">{bars}</g>' + labels, 308, .78)
 
 
 def heatmap(days):
@@ -253,7 +358,7 @@ def heatmap(days):
     body += text(680, 204, "Less", 14, MUTED) + text(813, 204, "More", 14, MUTED, False, "end")
     for i, color in enumerate(LEVELS):
         body += rect(712 + i * 14, 193, 11, 11, color, 2)
-    return card("GitHub contribution calendar for the last 365 days", body, 226, 1.42)
+    return card("GitHub contribution calendar for the last 365 days", body, 226, 1.61)
 
 
 def main():
@@ -275,18 +380,21 @@ def main():
     if len(days) != 365 or any((day - days[0][0]).days != i or count < 0 or not 0 <= level <= 4
                                for i, (day, count, level) in enumerate(days)):
         raise ValueError("Expected 365 consecutive dates with valid contribution counts and levels")
+    commits = (refresh_commits(args.refresh, days[-1][0]) if args.refresh
+               else json.loads(COMMITS.read_text(encoding="utf-8")))
 
     cards = {
         "hero": hero(args.portrait),
         "repos": tile("GitHub", "Browse repositories", "<>", .24),
         "linkedin": tile("LinkedIn", "Connect with me", "in", .34),
         "leetcode": tile("LeetCode", "See my practice", "{ }", .44),
+        "commit-sun": commit_sun(commits),
         "monthly": monthly(days),
         "url_shortner": repo("URL Shortener", "Create custom short links and track clicks from a dashboard.",
-                             "React · Node.js · Express · MongoDB", .87),
+                             "React · Node.js · Express · MongoDB", 1.01),
         "socialsync-ai": repo("SocialSync AI", "Generate captions, connect social accounts, and schedule posts.",
-                              "React · Express · MongoDB · Gemini", 1.04),
-        "html-resume": repo("HTML Résumé", "A web-based résumé built with HTML.", "HTML", 1.21),
+                              "React · Express · MongoDB · Gemini", 1.21),
+        "html-resume": repo("HTML Résumé", "A web-based résumé built with HTML.", "HTML", 1.41),
         "contributions": heatmap(days),
     }
     args.output.mkdir(parents=True, exist_ok=True)
@@ -296,6 +404,8 @@ def main():
         DATA.parent.mkdir(exist_ok=True)
         rows = ",\n".join(f"    {json.dumps(row)}" for row in snapshot["days"])
         DATA.write_text(f'{{\n  "days": [\n{rows}\n  ]\n}}\n', encoding="utf-8", newline="\n")
+    if args.refresh:
+        COMMITS.write_text(json.dumps(commits, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
