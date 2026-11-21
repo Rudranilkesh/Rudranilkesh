@@ -18,7 +18,7 @@
   <a href="https://github.com/Rudranilkesh/URL_SHORTNER"><img src="./cards/url_shortner.svg" width="100%" alt="URL Shortener with custom links and click tracking"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Rudranilkesh/html-portfolio"><img src="./cards/html-portfolio.svg" width="100%" alt="HTML Portfolio, an early collection of web projects and personal pages"></a>
+  <a href="https://github.com/Rudranilkesh/Ai-Powered-Social-Media-Manager"><img src="./cards/socialsync-ai.svg" width="100%" alt="SocialSync AI, an AI-powered social media manager for generating captions and scheduling posts"></a>
 </p>
 <p align="center">
   <a href="https://github.com/Rudranilkesh/html-resume"><img src="./cards/html-resume.svg" width="100%" alt="HTML Résumé, a web-based résumé built with HTML"></a>

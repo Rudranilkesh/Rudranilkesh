@@ -284,8 +284,8 @@ def main():
         "monthly": monthly(days),
         "url_shortner": repo("URL Shortener", "Create custom short links and track clicks from a dashboard.",
                              "React · Node.js · Express · MongoDB", .87),
-        "html-portfolio": repo("HTML Portfolio", "An early collection of web projects and personal pages.",
-                               "HTML · GitHub Pages", 1.04),
+        "socialsync-ai": repo("SocialSync AI", "Generate captions, connect social accounts, and schedule posts.",
+                              "React · Express · MongoDB · Gemini", 1.04),
         "html-resume": repo("HTML Résumé", "A web-based résumé built with HTML.", "HTML", 1.21),
         "contributions": heatmap(days),
     }
