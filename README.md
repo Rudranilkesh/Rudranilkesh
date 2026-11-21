@@ -29,7 +29,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rudranilkesh#contribution-activity"><img src="./cards/contributions.svg" width="100%" alt="GitHub contribution heatmap for the last 365 days"></a>
+  <a href="https://github.com/Rudranilkesh#contribution-activity"><img src="./cards/contributions.svg" width="100%" alt="GitHub profile contribution heatmap for the last year"></a>
 </p>
 
 **Working with** Java, JavaScript, TypeScript, React, Node.js, Express, MongoDB and PostgreSQL.

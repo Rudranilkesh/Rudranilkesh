@@ -40,9 +40,13 @@ class ContributionCalendar(HTMLParser):
         self.days = {}
         self.tooltips = {}
         self.tooltip_id = None
+        self.in_heading = False
+        self.heading = ""
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == "h2" and attrs.get("id") == "js-contribution-activity-description":
+            self.in_heading = True
         if tag == "td" and {"id", "data-date", "data-level"} <= attrs.keys():
             self.days[attrs["id"]] = (attrs["data-date"], int(attrs["data-level"]))
         if tag == "tool-tip" and "for" in attrs:
@@ -50,10 +54,14 @@ class ContributionCalendar(HTMLParser):
             self.tooltips[self.tooltip_id] = ""
 
     def handle_data(self, value):
+        if self.in_heading:
+            self.heading += value
         if self.tooltip_id is not None:
             self.tooltips[self.tooltip_id] += value
 
     def handle_endtag(self, tag):
+        if tag == "h2":
+            self.in_heading = False
         if tag == "tool-tip":
             self.tooltip_id = None
 
@@ -72,17 +80,21 @@ def read_calendar(html):
     parser = ContributionCalendar()
     parser.feed(html)
     counts = parser.counts()
-    if len(counts) < 365:
-        raise ValueError(f"Expected at least 365 days, got {len(counts)}")
-    end = date.fromisoformat(max(counts))
-    dates = [end - i * DAY for i in range(364, -1, -1)]
-    return {"days": [{"date": day.isoformat(), "count": counts[day.isoformat()][0],
-                      "level": counts[day.isoformat()][1]} for day in dates]}
+    heading = " ".join(parser.heading.split())
+    match = re.fullmatch(r"([\d,]+) contributions? in the last year", heading)
+    if not match:
+        raise ValueError(f"Missing GitHub's last-year contribution total: {heading!r}")
+    total = int(match[1].replace(",", ""))
+    if sum(count for count, _ in counts.values()) != total:
+        raise ValueError("GitHub's calendar cells do not match its displayed contribution total")
+    return {"total": total, "days": [{"date": day, "count": count, "level": level}
+                                     for day, (count, level) in sorted(counts.items())]}
 
 
 def refresh_calendar(username):
     url = f"https://github.com/users/{quote(username, safe='')}/contributions"
-    request = Request(url, headers={"Accept-Language": "en-US", "User-Agent": "profile-card-renderer"})
+    request = Request(url, headers={"Accept-Language": "en-US", "Cache-Control": "no-cache",
+                                    "User-Agent": "profile-card-renderer"})
     with urlopen(request, timeout=30) as response:
         return read_calendar(response.read().decode("utf-8"))
 
@@ -316,7 +328,7 @@ def monthly(days):
         streak += 1
 
     body = text(28, 44, "Monthly contributions", 33, INK, True)
-    body += text(810, 43, "LAST 365 DAYS", 15, BLUE, True, "end")
+    body += text(810, 43, "LAST YEAR", 15, BLUE, True, "end")
     peak_label = f"{busiest:%b} {busiest.day} · {peak}" if peak else "—"
     streak_label = f"{streak} {'day' if streak == 1 else 'days'}"
     for x, value, label in ((28, streak_label, "Current streak"), (293, active, "Active days"),
@@ -358,7 +370,7 @@ def heatmap(days):
     body += text(680, 204, "Less", 14, MUTED) + text(813, 204, "More", 14, MUTED, False, "end")
     for i, color in enumerate(LEVELS):
         body += rect(712 + i * 14, 193, 11, 11, color, 2)
-    return card("GitHub contribution calendar for the last 365 days", body, 226, 1.61)
+    return card("GitHub contribution calendar for the last year", body, 226, 1.61)
 
 
 def main():
@@ -377,9 +389,13 @@ def main():
     else:
         snapshot = json.loads(DATA.read_text(encoding="utf-8"))
     days = [(date.fromisoformat(item["date"]), item["count"], item["level"]) for item in snapshot["days"]]
-    if len(days) != 365 or any((day - days[0][0]).days != i or count < 0 or not 0 <= level <= 4
-                               for i, (day, count, level) in enumerate(days)):
-        raise ValueError("Expected 365 consecutive dates with valid contribution counts and levels")
+    # GitHub's rolling calendar starts on a Sunday, so the number of visible days varies.
+    if not 365 <= len(days) <= 373 or any((day - days[0][0]).days != i or count < 0 or not 0 <= level <= 4
+                                          for i, (day, count, level) in enumerate(days)):
+        raise ValueError("Expected a full year of consecutive GitHub calendar dates")
+    total = sum(count for _, count, _ in days)
+    if snapshot.get("total", total) != total:
+        raise ValueError("Saved calendar days do not add up to GitHub's total")
     commits = (refresh_commits(args.refresh, days[-1][0]) if args.refresh
                else json.loads(COMMITS.read_text(encoding="utf-8")))
 
@@ -403,7 +419,7 @@ def main():
     if args.refresh or args.calendar_html:
         DATA.parent.mkdir(exist_ok=True)
         rows = ",\n".join(f"    {json.dumps(row)}" for row in snapshot["days"])
-        DATA.write_text(f'{{\n  "days": [\n{rows}\n  ]\n}}\n', encoding="utf-8", newline="\n")
+        DATA.write_text(f'{{\n  "total": {total},\n  "days": [\n{rows}\n  ]\n}}\n', encoding="utf-8", newline="\n")
     if args.refresh:
         COMMITS.write_text(json.dumps(commits, indent=2) + "\n", encoding="utf-8", newline="\n")
 
