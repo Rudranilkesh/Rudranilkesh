@@ -8,10 +8,14 @@ on:
     paths:
       - "README.md"
       - ".github/workflows/update-profile-stats.yml"
-      - "github-readme-stats.toml"
+      - "render_cards.py"
+      - "assets/**"
 
 permissions:
   contents: write
+
+concurrency:
+  group: profile-cards-${{ github.ref }}
 
 jobs:
   generate:
@@ -21,41 +25,24 @@ jobs:
       - name: Checkout profile repository
         uses: actions/checkout@v6
 
-      - name: Generate local GitHub stats and commit-language card
-        uses: lucifer1004/github-stats-typst@v1
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          username: ${{ github.repository_owner }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          theme: tokyo-night
-          cards: profile,timedist,heatmap,language
-          output-dir: profile
+          python-version: '3.13'
 
-      - name: Generate local repository-language card
-        uses: stats-organization/github-readme-stats-action@v2
-        with:
-          card: top-langs
-          options: username=${{ github.repository_owner }}&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&size_weight=1&count_weight=0
-          path: profile/top-langs.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install FontTools
+        run: python -m pip install fonttools==4.68.0
 
-      - name: Generate local contribution streak card
-        uses: DenverCoder1/github-readme-streak-stats@main
-        with:
-          options: user=${{ github.repository_owner }}&theme=tokyonight&hide_border=true&disable_animations=true&timezone=Asia%2FKolkata
-          path: profile/streak.svg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Generate local GitHub trophies
-        uses: Erik-Donath/github-profile-trophy@feature/generate-svg
-        with:
-          username: ${{ github.repository_owner }}
-          file: profile/trophy.svg
-          token: ${{ secrets.GHT }}
+      - name: Refresh the contribution snapshot and render SVG cards
+        env:
+          PROFILE_OWNER: ${{ github.repository_owner }}
+        run: python render_cards.py --refresh "$PROFILE_OWNER"
 
       - name: Commit generated cards
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/*.svg
-          git diff --staged --quiet || git commit -m "chore: update GitHub profile stats"
+          git add data/contributions.json cards/*.svg
+          if git diff --staged --quiet; then exit 0; fi
+          git commit -m "chore: refresh profile cards"
           git push

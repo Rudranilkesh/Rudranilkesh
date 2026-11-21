@@ -1,29 +1,31 @@
 <div align="center">
-  <img src="cards/hero.svg" width="100%" alt="Rudranil Kesh. BCA student building full-stack apps, APIs and backend systems.">
+  <img src="./cards/hero.svg" width="100%" alt="RudraniL Kesh. BCA student building full-stack apps, APIs and backend systems.">
 </div>
 
 <p align="center">
-  <a href="https://github.com/Rudranilkesh?tab=repositories"><img src="cards/repos.svg" width="32.5%" alt="Browse my GitHub repositories"></a><a href="https://www.linkedin.com/in/rudranilkesh6"><img src="cards/linkedin.svg" width="32.5%" alt="Connect with me on LinkedIn"></a><a href="https://leetcode.com/u/rudranilkesh/"><img src="cards/leetcode.svg" width="32.5%" alt="See my LeetCode practice"></a>
+  <a href="https://github.com/Rudranilkesh?tab=repositories"><img src="./cards/repos.svg" width="32.5%" alt="Browse my GitHub repositories"></a>
+  <a href="https://www.linkedin.com/in/rudranilkesh6"><img src="./cards/linkedin.svg" width="32.5%" alt="Connect with me on LinkedIn"></a>
+  <a href="https://leetcode.com/u/rudranilkesh/"><img src="./cards/leetcode.svg" width="32.5%" alt="See my LeetCode practice"></a>
 </p>
 
 <p align="center">
-  <img src="cards/monthly.svg" width="100%" alt="Monthly contribution totals, current streak, active days and busiest day">
+  <img src="./cards/monthly.svg" width="100%" alt="Monthly contribution totals, current streak, active days and busiest day">
 </p>
 
 ## Featured projects
 
 <p align="center">
-  <a href="https://github.com/Rudranilkesh/URL_SHORTNER"><img src="cards/url_shortner.svg" width="100%" alt="URL Shortener, a project with separate frontend and backend components"></a>
+  <a href="https://github.com/Rudranilkesh/URL_SHORTNER"><img src="./cards/url_shortner.svg" width="100%" alt="URL Shortener with custom links and click tracking"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Rudranilkesh/html-portfolio"><img src="cards/html-portfolio.svg" width="100%" alt="HTML Portfolio, an early frontend project"></a>
+  <a href="https://github.com/Rudranilkesh/html-portfolio"><img src="./cards/html-portfolio.svg" width="100%" alt="HTML Portfolio, an early collection of web projects and personal pages"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/Rudranilkesh/html-resume"><img src="cards/html-resume.svg" width="100%" alt="HTML Résumé, a web-based résumé built with HTML"></a>
+  <a href="https://github.com/Rudranilkesh/html-resume"><img src="./cards/html-resume.svg" width="100%" alt="HTML Résumé, a web-based résumé built with HTML"></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/Rudranilkesh"><img src="cards/contributions.svg" width="100%" alt="GitHub contribution heatmap for the last 365 days"></a>
+  <a href="https://github.com/Rudranilkesh#contribution-activity"><img src="./cards/contributions.svg" width="100%" alt="GitHub contribution heatmap for the last 365 days"></a>
 </p>
 
 **Working with** Java, JavaScript, TypeScript, React, Node.js, Express, MongoDB and PostgreSQL.
